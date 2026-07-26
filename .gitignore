@@ -1,6 +1,9 @@
 # Config local del preview de Claude Code
 .claude/
 
+# Servidor local de desarrollo (no forma parte del sitio; confunde a Vercel)
+server.js
+
 # Paquetes de despliegue (se generan, no se versionan)
 *.zip
 
