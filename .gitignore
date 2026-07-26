@@ -1,0 +1,10 @@
+# Config local del preview de Claude Code
+.claude/
+
+# Paquetes de despliegue (se generan, no se versionan)
+*.zip
+
+# Basura del sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini

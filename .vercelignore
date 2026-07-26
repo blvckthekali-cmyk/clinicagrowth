@@ -1,0 +1,8 @@
+# Archivos solo para desarrollo local — no se suben a Vercel
+server.js
+abrir-web.bat
+desplegar-vercel.bat
+subir-a-github.bat
+.gitignore
+.claude/
+*.zip

@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0A1A2F" />
+
+  <title>ClinicAI Growth — Duplicamos tus citas confirmadas en 30 días</title>
+  <meta name="description" content="Instalamos un sistema de IA que responde a cada paciente en segundos, te llena la agenda y elimina los no-shows. Agenda tu diagnóstico gratuito." />
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="ClinicAI Growth — Duplicamos tus citas confirmadas en 30 días" />
+  <meta property="og:description" content="Sistema de IA para clínicas: responde a cada paciente en segundos, llena tu agenda y elimina los no-shows. Diagnóstico gratuito." />
+  <meta property="og:locale" content="es_ES" />
+
+  <!-- Favicon (inline SVG) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230A1A2F'/%3E%3Cpath d='M9 16h3l2-5 4 10 2-5h3' fill='none' stroke='%231E6BE6' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+  <!-- ====================== PANTALLA DE CARGA ====================== -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-inner">
+      <svg class="preloader-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect width="32" height="32" rx="8" fill="#0A1A2F" />
+        <path class="preloader-pulse" pathLength="40" d="M9 16h3l2-5 4 10 2-5h3" stroke="#1E6BE6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <p class="preloader-brand">ClinicAI <span class="preloader-brand-accent">Growth</span></p>
+      <div class="preloader-bar" aria-hidden="true"><i></i></div>
+    </div>
+  </div>
+  <script>
+    /* Evita el flash del preloader en visitas repetidas de la misma sesión */
+    try { if (sessionStorage.getItem('cagLoaderShown')) { document.getElementById('preloader').setAttribute('hidden', ''); } } catch (e) {}
+  </script>
+  <noscript><style>.preloader { display: none !important; }</style></noscript>
+
+  <a class="skip-link" href="#main" data-i18n="skip">Saltar al contenido</a>
+
+  <!-- ============================ HEADER ============================ -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a href="#hero" class="brand" aria-label="ClinicAI Growth — inicio">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
+            <rect width="32" height="32" rx="8" fill="#0A1A2F" />
+            <path d="M9 16h3l2-5 4 10 2-5h3" stroke="#1E6BE6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+        <span class="brand-name">ClinicAI <span class="brand-name-accent">Growth</span></span>
+      </a>
+
+      <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+        <a href="#beneficios" class="nav-link" data-i18n="nav.benefits">Qué consigues</a>
+        <a href="#como-funciona" class="nav-link" data-i18n="nav.how">Cómo funciona</a>
+        <a href="#reserva" class="nav-link" data-i18n="nav.book">Reservar</a>
+        <a href="#servicios" class="nav-link" data-i18n="nav.services">Servicios</a>
+        <a href="#garantia" class="nav-link" data-i18n="nav.guarantee">Garantía</a>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Selector de idioma -->
+        <div class="lang-switch" id="lang-switch">
+          <button class="lang-btn" id="lang-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Cambiar idioma / Change language">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" /></svg>
+            <span id="lang-current">ES</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9" /></svg>
+          </button>
+          <ul class="lang-menu" id="lang-menu" role="listbox" aria-label="Idiomas" hidden>
+            <li><button type="button" role="option" data-lang="es" aria-selected="true">Español</button></li>
+            <li><button type="button" role="option" data-lang="en" aria-selected="false">English</button></li>
+            <li><button type="button" role="option" data-lang="ca" aria-selected="false">Català</button></li>
+          </ul>
+        </div>
+
+        <a href="#diagnostico" class="btn btn-primary btn-sm header-cta">
+          <span class="header-cta-full" data-i18n="cta.full">Agendar diagnóstico gratuito</span>
+          <span class="header-cta-short" data-i18n="cta.short">Agendar diagnóstico</span>
+        </a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <nav aria-label="Navegación móvil">
+        <a href="#beneficios" class="mobile-link" data-i18n="nav.benefits">Qué consigues</a>
+        <a href="#como-funciona" class="mobile-link" data-i18n="nav.how">Cómo funciona</a>
+        <a href="#reserva" class="mobile-link" data-i18n="nav.book">Reservar</a>
+        <a href="#servicios" class="mobile-link" data-i18n="nav.services">Servicios</a>
+        <a href="#garantia" class="mobile-link" data-i18n="nav.guarantee">Garantía</a>
+        <a href="#diagnostico" class="btn btn-primary mobile-cta" data-i18n="cta.full">Agendar diagnóstico gratuito</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================ HERO ============================ -->
+    <section class="hero" id="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <canvas class="neural-canvas" id="neural-canvas" aria-hidden="true"></canvas>
+      <div class="container hero-inner">
+        <div class="hero-copy reveal">
+          <p class="kicker" data-i18n="hero.kicker">Sistema clínica inteligente</p>
+          <h1 class="hero-title" data-i18n="hero.title">Duplicamos tus citas confirmadas en 30 días. <span class="accent-text">Sin contratar a nadie más.</span></h1>
+          <p class="hero-subtitle" data-i18n="hero.subtitle">Instalamos un sistema de IA que responde a cada paciente en segundos, te llena la agenda y elimina los no-shows. Tú solo te ocupas de atender.</p>
+          <div class="hero-actions">
+            <a href="#diagnostico" class="btn btn-primary btn-lg" data-i18n="cta.full">Agendar diagnóstico gratuito</a>
+            <a href="#como-funciona" class="btn btn-secondary btn-lg">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3" fill="currentColor" stroke="none" /></svg>
+              <span data-i18n="hero.cta2">Ver cómo funciona el sistema</span>
+            </a>
+          </div>
+          <ul class="hero-trust">
+            <li>
+              <svg class="icon icon-accent" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></svg>
+              <span data-i18n="hero.t1">Garantía de 30 días</span>
+            </li>
+            <li>
+              <svg class="icon icon-accent" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+              <span data-i18n="hero.t2">Respuesta en &lt;60&nbsp;s</span>
+            </li>
+            <li>
+              <svg class="icon icon-accent" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
+              <span data-i18n="hero.t3">Especialistas en clínicas</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Mockup: conversación de chat + mini panel de métricas (CSS/SVG) -->
+        <div class="hero-visual reveal" aria-hidden="true">
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="chat">
+              <div class="chat-head">
+                <span class="chat-avatar">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 16h2l1.5-4 3 8 1.5-4H20" /></svg>
+                </span>
+                <div class="chat-head-text">
+                  <strong>Clínica Vital · IA</strong>
+                  <span class="chat-status"><span class="dot-online"></span> <span data-i18n="chat.status">En línea · responde al instante</span></span>
+                </div>
+              </div>
+              <div class="chat-body">
+                <div class="bubble bubble-in" data-i18n="chat.b1">Hola, ¿tienen hueco para una limpieza dental esta semana? 😊</div>
+                <div class="bubble bubble-out" data-i18n="chat.b2">¡Hola! Claro 🙌 Tengo el <strong>jueves a las 10:30</strong> o el <strong>viernes a las 17:00</strong>. ¿Cuál te viene mejor?</div>
+                <div class="bubble bubble-in" data-i18n="chat.b3">El jueves a las 10:30</div>
+                <div class="bubble bubble-out" data-i18n="chat.b4">¡Reservado! ✅ Te he agendado el <strong>jueves 10:30</strong>. Te enviaré un recordatorio el día antes. ¿Me confirmas tu nombre?</div>
+                <div class="typing"><span></span><span></span><span></span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="metric-pop metric-pop-1">
+            <span class="metric-pop-label" data-i18n="chat.pop1l">Cita confirmada</span>
+            <span class="metric-pop-value"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#16A37B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg> <span data-i18n="chat.pop1v">+1 hoy</span></span>
+          </div>
+          <div class="metric-pop metric-pop-2">
+            <span class="metric-pop-label" data-i18n="chat.pop2l">Tiempo de respuesta</span>
+            <span class="metric-pop-value metric-pop-value-blue">12 s</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== BARRA DE MÉTRICAS ====================== -->
+    <section class="metrics-strip" aria-label="Métricas de referencia">
+      <div class="container">
+        <ul class="metrics-grid reveal">
+          <li class="metric">
+            <span class="metric-number" data-count="42" data-prefix="+" data-suffix="%">+42%</span>
+            <span class="metric-label" data-i18n="metrics.m1">citas confirmadas</span>
+          </li>
+          <li class="metric">
+            <span class="metric-number" data-count="60" data-prefix="−" data-suffix="%">−60%</span>
+            <span class="metric-label" data-i18n="metrics.m2">no-shows</span>
+          </li>
+          <li class="metric">
+            <span class="metric-number">&lt;60 s</span>
+            <span class="metric-label" data-i18n="metrics.m3">tiempo de respuesta</span>
+          </li>
+          <li class="metric">
+            <span class="metric-number">24/7</span>
+            <span class="metric-label" data-i18n="metrics.m4">atención automática</span>
+          </li>
+        </ul>
+        <p class="metrics-footnote" data-i18n="metrics.note">Cifras de referencia de implementaciones del sistema.</p>
+      </div>
+    </section>
+
+    <!-- ================ EL COSTE DE NO RESPONDER (escena) ================ -->
+    <section class="section section-alt story-section" id="coste">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 class="section-title" data-i18n="story.title">El coste de no responder</h2>
+          <p class="section-subtitle" data-i18n="story.sub">Cada mensaje sin respuesta es una cita que se va a otra clínica. Míralo en 14 segundos.</p>
+        </div>
+
+        <div class="story-frame reveal">
+          <div class="demo-frame-bar" aria-hidden="true">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="demo-frame-title" data-i18n="story.frame">La diferencia · 14 s</span>
+          </div>
+
+          <div class="story-scene" id="story-scene">
+            <!-- Acto 1: sin sistema -->
+            <div class="story-act story-act-bad">
+              <span class="story-label story-label-bad" data-i18n="story.bad">Sin sistema</span>
+              <div class="story-chat">
+                <div class="story-step story-bubble sb-in sb-m1" data-i18n="story.m1">Hola, ¿tenéis hueco esta semana? 😊</div>
+                <div class="story-step story-status sb-seen">
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+                  <span data-i18n="story.seen">Visto · hace 3 horas</span>
+                </div>
+                <div class="story-step story-bubble sb-in sb-m2" data-i18n="story.m2">Déjalo, ya he reservado en otra clínica.</div>
+              </div>
+              <div class="story-step story-stamp stamp-lost sb-lost">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+                <span data-i18n="story.lost">Paciente perdido · −350&nbsp;€</span>
+              </div>
+            </div>
+
+            <!-- Acto 2: con ClinicAI Growth -->
+            <div class="story-act story-act-good">
+              <span class="story-label story-label-good" data-i18n="story.good">Con ClinicAI Growth</span>
+              <div class="story-chat">
+                <div class="story-step story-bubble sb-in sb-m3" data-i18n="story.m1">Hola, ¿tenéis hueco esta semana? 😊</div>
+                <div class="story-step story-bubble sb-out sb-r1" data-i18n="story.r1">¡Hola! 👋 Sí: mañana a las 10:30 o el jueves a las 17:00. ¿Te reservo?</div>
+                <div class="story-step story-reply-meta sb-r1meta">
+                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" /></svg>
+                  <span data-i18n="story.fast">Respondido en 9 segundos</span>
+                </div>
+                <div class="story-step story-bubble sb-in sb-m4" data-i18n="story.m4">¡Perfecto, me quedo el de mañana! 🙌</div>
+              </div>
+              <div class="story-step story-stamp stamp-won sb-won">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
+                <span data-i18n="story.won">Cita confirmada · +350&nbsp;€</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="story-controls">
+            <button type="button" class="story-btn" id="story-toggle" aria-label="Reproducir o pausar la escena">
+              <svg class="story-ic-play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3" fill="currentColor" /></svg>
+              <svg class="story-ic-pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="5" y="4" width="4.5" height="16" rx="1.5" fill="currentColor" /><rect x="14.5" y="4" width="4.5" height="16" rx="1.5" fill="currentColor" /></svg>
+            </button>
+            <div class="story-track" aria-hidden="true"><i id="story-progress"></i></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================== QUÉ CONSIGUES ======================== -->
+    <section class="section" id="beneficios">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 class="section-title" data-i18n="ben.title">Qué consigues</h2>
+          <p class="section-subtitle" data-i18n="ben.sub">Una clínica que se llena sola, sin depender de que suene el teléfono.</p>
+        </div>
+
+        <div class="cards-grid">
+          <article class="card reveal">
+            <span class="card-icon">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v4" /><path d="M16 2v4" /><rect width="18" height="18" x="3" y="4" rx="2" /><path d="M3 10h18" /><path d="m9 16 2 2 4-4" /></svg>
+            </span>
+            <h3 class="card-title" data-i18n="ben.c1t">Agenda llena y predecible</h3>
+            <p class="card-text" data-i18n="ben.c1d">Deja de depender del azar. Tu agenda se llena con pacientes cualificados, no con curiosos.</p>
+          </article>
+
+          <article class="card reveal">
+            <span class="card-icon">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+            </span>
+            <h3 class="card-title" data-i18n="ben.c2t">Respuesta inmediata 24/7</h3>
+            <p class="card-text" data-i18n="ben.c2d">Cada mensaje, a cualquier hora, contestado en segundos. El paciente que escribe ya no se va a la competencia.</p>
+          </article>
+
+          <article class="card reveal">
+            <span class="card-icon">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
+            </span>
+            <h3 class="card-title" data-i18n="ben.c3t">Recupera los 'me lo pienso'</h3>
+            <p class="card-text" data-i18n="ben.c3d">Reactivamos a quien preguntó y no reservó. Dinero que dabas por perdido, de vuelta a tu agenda.</p>
+          </article>
+
+          <article class="card reveal">
+            <span class="card-icon">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" /><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" /><path d="M4 2C2.8 3.7 2 5.7 2 8" /><path d="M22 8c0-2.3-.8-4.3-2-6" /></svg>
+            </span>
+            <h3 class="card-title" data-i18n="ben.c4t">Menos no-shows</h3>
+            <p class="card-text" data-i18n="ben.c4d">Recordatorios automáticos que confirman y reprograman. Menos huecos vacíos, más facturación.</p>
+          </article>
+
+          <article class="card reveal">
+            <span class="card-icon">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect width="7" height="9" x="3" y="3" rx="1" /><rect width="7" height="5" x="14" y="3" rx="1" /><rect width="7" height="9" x="14" y="12" rx="1" /><rect width="7" height="5" x="3" y="16" rx="1" /></svg>
+            </span>
+            <h3 class="card-title" data-i18n="ben.c5t">Control total con CRM</h3>
+            <p class="card-text" data-i18n="ben.c5d">Todos tus pacientes y conversaciones ordenados en un panel. Sabes qué pasa en tu clínica en tiempo real.</p>
+          </article>
+
+          <article class="card reveal">
+            <span class="card-icon">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z" /><path d="M5 3v4" /><path d="M19 17v4" /><path d="M3 5h4" /><path d="M17 19h4" /></svg>
+            </span>
+            <h3 class="card-title" data-i18n="ben.c6t">Sin caos operativo</h3>
+            <p class="card-text" data-i18n="ben.c6d">Tu recepción deja de apagar fuegos. El sistema hace lo repetitivo; tu equipo, lo que importa.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= CÓMO FUNCIONA ======================= -->
+    <section class="section section-alt" id="como-funciona">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 class="section-title" data-i18n="how.title">Cómo funciona</h2>
+          <p class="section-subtitle" data-i18n="how.sub">Tres pasos para pasar del caos a una agenda que se llena sola.</p>
+        </div>
+
+        <ol class="steps">
+          <li class="step reveal">
+            <span class="step-number">1</span>
+            <span class="step-icon">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+            </span>
+            <h3 class="step-title" data-i18n="how.s1t">Diagnóstico</h3>
+            <p class="step-text" data-i18n="how.s1d">Analizamos tu clínica y detectamos exactamente por dónde se te escapan los pacientes.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-number">2</span>
+            <span class="step-icon">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" /></svg>
+            </span>
+            <h3 class="step-title" data-i18n="how.s2t">Instalación</h3>
+            <p class="step-text" data-i18n="how.s2d">Montamos tu sistema —IA de chat y voz, reservas, recordatorios y CRM— en días, sobre las herramientas que ya usas.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-number">3</span>
+            <span class="step-icon">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" /><polyline points="16 7 22 7 22 13" /></svg>
+            </span>
+            <h3 class="step-title" data-i18n="how.s3t">Optimización</h3>
+            <p class="step-text" data-i18n="how.s3d">Medimos, ajustamos y escalamos tus citas confirmadas mes a mes. No te dejamos solo tras la venta.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===================== DEMO INTERACTIVA ===================== -->
+    <section class="section" id="demo">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 class="section-title" data-i18n="demo.title">Pruébalo tú mismo</h2>
+          <p class="section-subtitle" data-i18n="demo.sub">Escríbele como si fueras un paciente y mira lo rápido que responde y te agenda.</p>
+        </div>
+
+        <div class="demo-frame reveal">
+          <div class="demo-frame-bar" aria-hidden="true">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="demo-frame-title" data-i18n="demo.frame">Asistente IA · Clínica</span>
+          </div>
+
+          <!-- ===== Chat DEMO interactivo (nativo, respuestas al instante) ===== -->
+          <div class="demo-chat" id="demo-chat">
+            <div class="demo-chat-messages" id="demo-chat-messages" aria-live="polite"></div>
+            <div class="demo-chat-chips" id="demo-chat-chips"></div>
+            <form class="demo-chat-inputbar" id="demo-chat-form" autocomplete="off">
+              <input type="text" id="demo-chat-input" placeholder="Escribe tu pregunta…" data-i18n-ph="dchat.ph" aria-label="Escribe tu mensaje" maxlength="200" />
+              <button type="submit" class="demo-chat-send" aria-label="Enviar mensaje">
+                <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /><path d="m21.854 2.147-10.94 10.939" /></svg>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <p class="demo-note reveal" data-i18n="dchat.note">Demo interactiva con respuestas simuladas al instante. El sistema real se conecta a la agenda y al WhatsApp de tu clínica.</p>
+      </div>
+    </section>
+
+    <!-- ================== RESERVA EN EL CALENDARIO ================== -->
+    <section class="section section-alt" id="reserva">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 class="section-title" data-i18n="book.title">Reserva directamente en el calendario</h2>
+          <p class="section-subtitle" data-i18n="book.sub">Elige día y hora y confirma tu llamada en menos de un minuto.</p>
+        </div>
+
+        <div class="calendly-frame reveal">
+          <iframe src="https://calendly.com/aclinicaigrowth/nueva-reunion?hide_gdpr_banner=1&primary_color=1E6BE6" title="Calendario de reservas — ClinicAI Growth" loading="lazy"></iframe>
+        </div>
+
+        <p class="book-external reveal">
+          <a class="btn btn-secondary btn-sm" href="https://calendly.com/aclinicaigrowth/nueva-reunion" target="_blank" rel="noopener">
+            <span data-i18n="book.open">Abrir en Calendly</span>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h6v6" /><path d="M10 14 21 3" /><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /></svg>
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================== COMPARACIÓN ======================== -->
+    <section class="section" id="comparacion">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 class="section-title" data-i18n="cmp.title">Por qué no es lo mismo</h2>
+          <p class="section-subtitle" data-i18n="cmp.sub">No es un bot suelto. Es un sistema completo, pensado para clínicas.</p>
+        </div>
+
+        <div class="compare reveal">
+          <div class="compare-col compare-others">
+            <h3 class="compare-head" data-i18n="cmp.others">Otros proveedores</h3>
+            <ul class="compare-list">
+              <li><span class="compare-mark compare-x"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></span><span data-i18n="cmp.o1">Chatbots genéricos con respuestas robóticas</span></li>
+              <li><span class="compare-mark compare-x"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></span><span data-i18n="cmp.o2">Solo un bot suelto</span></li>
+              <li><span class="compare-mark compare-x"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></span><span data-i18n="cmp.o3">Sin enfoque en salud</span></li>
+              <li><span class="compare-mark compare-x"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></span><span data-i18n="cmp.o4">Sin psicología de venta</span></li>
+              <li><span class="compare-mark compare-x"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></span><span data-i18n="cmp.o5">Te lo entregan y desaparecen</span></li>
+            </ul>
+          </div>
+
+          <div class="compare-col compare-us">
+            <span class="compare-badge">ClinicAI Growth</span>
+            <h3 class="compare-head" data-i18n="cmp.us">La diferencia ClinicAI</h3>
+            <ul class="compare-list">
+              <li><span class="compare-mark compare-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg></span><span data-i18n="cmp.u1">IA real entrenada para el lenguaje de una clínica</span></li>
+              <li><span class="compare-mark compare-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg></span><span data-i18n="cmp.u2">Sistema integral: captación, reservas, recordatorios y CRM</span></li>
+              <li><span class="compare-mark compare-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg></span><span data-i18n="cmp.u3">Especialistas en clínicas médicas y estéticas</span></li>
+              <li><span class="compare-mark compare-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg></span><span data-i18n="cmp.u4">Neuro-persuasión aplicada en cada mensaje</span></li>
+              <li><span class="compare-mark compare-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg></span><span data-i18n="cmp.u5">Acompañamiento y optimización continua</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= NUESTROS SERVICIOS ======================= -->
+    <section class="section section-alt" id="servicios">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 class="section-title" data-i18n="plans.title">Elige tu fase de crecimiento</h2>
+          <p class="section-subtitle" data-i18n="plans.sub">Empieza por donde lo necesitas. Escala cuando los resultados lleguen.</p>
+        </div>
+
+        <div class="plans">
+          <article class="plan reveal">
+            <h3 class="plan-name">Starter</h3>
+            <p class="plan-price"><span class="plan-amount">497&nbsp;€</span></p>
+            <p class="plan-tagline" data-i18n="plans.sTag">Para empezar a no perder ni un paciente.</p>
+            <ul class="plan-features">
+              <li><span class="feat-check" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg></span><span data-i18n="plans.f1">Landing neuro-persuasiva</span></li>
+              <li><span class="feat-check" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg></span><span data-i18n="plans.f2">Agente de IA por chat</span></li>
+              <li><span class="feat-check" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg></span><span data-i18n="plans.f3">Sistema de reservas</span></li>
+            </ul>
+            <a href="#diagnostico" class="btn btn-secondary plan-cta" data-i18n="plans.cta">Agendar diagnóstico</a>
+          </article>
+
+          <article class="plan plan-featured reveal">
+            <span class="plan-badge" data-i18n="plans.badge">Más popular</span>
+            <h3 class="plan-name">Pro</h3>
+            <p class="plan-price"><span class="plan-amount">997&nbsp;€</span></p>
+            <p class="plan-tagline" data-i18n="plans.pTag">El sistema completo para llenar la agenda.</p>
+            <ul class="plan-features">
+              <li><span class="feat-check" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg></span><span data-i18n="plans.f4">Todo lo de Starter</span></li>
+              <li><span class="feat-check" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg></span><span data-i18n="plans.f5">Agente de IA por voz</span></li>
+              <li><span class="feat-check" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg></span><span data-i18n="plans.f6">Recordatorios anti no-show</span></li>
+              <li><span class="feat-check" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg></span><span data-i18n="plans.f7">CRM de pacientes</span></li>
+            </ul>
+            <a href="#diagnostico" class="btn btn-primary plan-cta" data-i18n="plans.cta">Agendar diagnóstico</a>
+          </article>
+
+          <article class="plan reveal">
+            <h3 class="plan-name">Elite</h3>
+            <p class="plan-price"><span class="plan-amount">1.797&nbsp;€</span></p>
+            <p class="plan-tagline" data-i18n="plans.eTag">Crecimiento sostenido y acompañamiento total.</p>
+            <ul class="plan-features">
+              <li><span class="feat-check" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg></span><span data-i18n="plans.f8">Todo lo de Pro</span></li>
+              <li><span class="feat-check" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg></span><span data-i18n="plans.f9">Reactivación de pacientes</span></li>
+              <li><span class="feat-check" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg></span><span data-i18n="plans.f10">Optimización mensual</span></li>
+              <li><span class="feat-check" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg></span><span data-i18n="plans.f11">Soporte prioritario</span></li>
+            </ul>
+            <a href="#diagnostico" class="btn btn-secondary plan-cta" data-i18n="plans.cta">Agendar diagnóstico</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================== GARANTÍA ========================== -->
+    <section class="section guarantee-section" id="garantia">
+      <div class="container">
+        <div class="guarantee reveal">
+          <span class="guarantee-icon">
+            <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#C8A96E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></svg>
+          </span>
+          <h2 class="guarantee-title" data-i18n="guar.title">Garantía de 30 días</h2>
+          <p class="guarantee-text" data-i18n="guar.text">Si en 30 días no duplicamos tus citas confirmadas, seguimos trabajando gratis hasta lograrlo. <strong>El riesgo lo asumimos nosotros.</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ESCASEZ / EXPANSIÓN ===================== -->
+    <section class="scarcity" aria-label="Fase de expansión 2026">
+      <div class="container scarcity-inner reveal">
+        <span class="scarcity-pulse" aria-hidden="true"></span>
+        <p class="scarcity-text" data-i18n="scar.text">
+          <strong>Fase de expansión 2026.</strong>
+          Solo aceptamos <strong>2 clínicas nuevas al mes</strong> para garantizar resultados reales. Las plazas se llenan rápido.
+        </p>
+        <a href="#diagnostico" class="btn btn-gold btn-sm" data-i18n="scar.cta">Reservar mi plaza</a>
+      </div>
+    </section>
+
+    <!-- ================== CTA FINAL + FORMULARIO ================== -->
+    <section class="section section-dark" id="diagnostico">
+      <div class="container">
+        <div class="diag-grid">
+          <div class="diag-copy reveal">
+            <h2 class="section-title section-title-light" data-i18n="diag.title">Solicita tu diagnóstico gratuito</h2>
+            <p class="diag-subtitle" data-i18n="diag.sub">15 minutos. Te decimos exactamente cuántas citas estás perdiendo y cómo recuperarlas. Sin compromiso.</p>
+            <ul class="diag-points">
+              <li><span class="feat-check feat-check-gold" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg></span><span data-i18n="diag.p1">Análisis real de tu clínica, no una plantilla.</span></li>
+              <li><span class="feat-check feat-check-gold" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg></span><span data-i18n="diag.p2">Plan claro de cuántas citas puedes recuperar.</span></li>
+              <li><span class="feat-check feat-check-gold" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg></span><span data-i18n="diag.p3">Sin coste y sin compromiso.</span></li>
+            </ul>
+            <div class="diag-ctas">
+              <a href="#form-diagnostico" class="btn btn-gold btn-lg" data-i18n="diag.call">Agendar llamada estratégica</a>
+              <a href="#reserva" class="btn btn-ghost-light btn-lg" data-i18n="diag.cal">Reservar en el calendario</a>
+            </div>
+          </div>
+
+          <div class="diag-form-wrap reveal">
+            <form class="diag-form" id="form-diagnostico" novalidate>
+              <div class="field">
+                <label for="nombre" data-i18n="form.lName">Nombre</label>
+                <input type="text" id="nombre" name="nombre" autocomplete="name" required placeholder="Tu nombre" data-i18n-ph="form.phName" />
+                <span class="field-error" data-for="nombre"></span>
+              </div>
+
+              <div class="field">
+                <label for="clinica" data-i18n="form.lClinic">Nombre de la clínica</label>
+                <input type="text" id="clinica" name="clinica" autocomplete="organization" required placeholder="Nombre de tu clínica" data-i18n-ph="form.phClinic" />
+                <span class="field-error" data-for="clinica"></span>
+              </div>
+
+              <div class="field">
+                <label for="contacto" data-i18n="form.lContact">WhatsApp o email</label>
+                <input type="text" id="contacto" name="contacto" inputmode="email" autocomplete="email" required placeholder="+34 600 000 000 o tu@email.com" data-i18n-ph="form.phContact" />
+                <span class="field-error" data-for="contacto"></span>
+              </div>
+
+              <div class="field">
+                <label for="problema" data-i18n="form.lProblem">¿Tu mayor problema?</label>
+                <select id="problema" name="problema" required>
+                  <option value="" disabled selected data-i18n="form.opt0">Elige una opción…</option>
+                  <option value="pocas-citas" data-i18n="form.opt1">Pocas citas</option>
+                  <option value="no-shows" data-i18n="form.opt2">Muchos no-shows</option>
+                  <option value="sin-tiempo" data-i18n="form.opt3">No me da tiempo a responder</option>
+                  <option value="otro" data-i18n="form.opt4">Otro</option>
+                </select>
+                <span class="field-error" data-for="problema"></span>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg form-submit" data-i18n="form.submit">Agendar diagnóstico gratuito</button>
+              <p class="form-microcopy" data-i18n="form.micro">Te contactamos en menos de 24&nbsp;h. Sin compromiso, sin permanencia.</p>
+
+              <!-- Estado de éxito -->
+              <div class="form-success" id="form-success" hidden role="status" aria-live="polite">
+                <span class="form-success-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#16A37B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                </span>
+                <p class="form-success-text" data-i18n="form.success">✅ ¡Recibido! Te contactamos en menos de 24&nbsp;h.</p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= DÓNDE ESTAMOS ======================= -->
+    <section class="section" id="contacto">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 class="section-title" data-i18n="where.title">Dónde estamos</h2>
+          <p class="section-subtitle" data-i18n="where.sub">Atendemos clínicas de toda España desde Viladecans (Barcelona).</p>
+        </div>
+
+        <div class="map-card reveal">
+          <iframe src="https://www.google.com/maps?q=Viladecans%2C%2008840%20Barcelona&output=embed" title="Mapa — Viladecans, 08840 Barcelona" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+
+        <div class="where-meta reveal">
+          <span class="where-addr">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /><circle cx="12" cy="10" r="3" /></svg>
+            Viladecans, 08840 Barcelona
+          </span>
+          <a class="where-dir" href="https://www.google.com/maps/dir//Viladecans,+08840+Barcelona" target="_blank" rel="noopener">
+            <span data-i18n="where.dir">Cómo llegar</span>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h6v6" /><path d="M10 14 21 3" /><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="#hero" class="brand brand-footer" aria-label="ClinicAI Growth — inicio">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" width="26" height="26" fill="none">
+              <rect width="32" height="32" rx="8" fill="#ffffff" fill-opacity="0.08" />
+              <path d="M9 16h3l2-5 4 10 2-5h3" stroke="#1E6BE6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+          <span class="brand-name">ClinicAI <span class="brand-name-accent">Growth</span></span>
+        </a>
+        <p class="footer-tagline" data-i18n="footer.tagline">Sistemas de IA que llenan la agenda de tu clínica y eliminan los no-shows.</p>
+      </div>
+
+      <div class="footer-contact">
+        <a href="mailto:aclinicaigrowth@gmail.com" class="footer-contact-link">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
+          aclinicaigrowth@gmail.com
+        </a>
+        <a href="https://wa.me/34623163164" class="footer-contact-link" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></svg>
+          WhatsApp: +34 623 16 31 64
+        </a>
+        <a href="https://www.google.com/maps?q=Viladecans,+08840+Barcelona" class="footer-contact-link" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /><circle cx="12" cy="10" r="3" /></svg>
+          Viladecans, 08840 Barcelona
+        </a>
+        <a href="#diagnostico" class="btn btn-primary btn-sm footer-cta" data-i18n="cta.full">Agendar diagnóstico gratuito</a>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© <span id="year">2026</span> ClinicAI Growth. <span data-i18n="footer.rights">Todos los derechos reservados.</span></p>
+      <p class="footer-legal" data-i18n="footer.legal">Cifras orientativas basadas en implementaciones del sistema. Resultados sujetos a las condiciones de cada clínica.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js" defer></script>
+  <script src="js/i18n.js" defer></script>
+  <script src="js/demo-chat.js" defer></script>
+  <script src="js/neural.js" defer></script>
+  <script src="js/story.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
